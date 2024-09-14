@@ -1,4 +1,4 @@
-!pip install opencv-python
+# !pip install opencv-python
 
 import numpy as np
 import cv2
@@ -28,7 +28,11 @@ num_steps = 1_000 # Number of simulation steps (underscore used for readability)
 # Initialize video writer to save the simulation as a video file 
 # N.B. You have to first create a "videos" folder in the folder where you saved the notebook.
 fourcc = cv2.VideoWriter_fourcc(*'XVID') # Define the codec
-out = cv2.VideoWriter('videos/random_walk_box.avi', fourcc, 20.0, (frame_size, frame_size)) # Creates a video as an output that is stored in the "videos" folder you just created
+# LP: This fails unless you have a "videos" folder in the same directory as this script. 
+# Would recommend having a configurable path for the output video file:
+from pathlib import Path
+video_folder = Path()
+out = cv2.VideoWriter(str(video_folder / 'random_walk_box.avi'), fourcc, 20.0, (frame_size, frame_size)) # Creates a video as an output that is stored in the "videos" folder you just created
 
 # Creation of a dictionary to store various statistics such as movements, distances, speeds, and positions
 statistics = {
@@ -43,6 +47,7 @@ def compute_total_time_in_center_and_outer_area(positions):
     """Computes total time the mouse spends in the center and in the outer parts of the arena""" 
     total_time_in_outer_area, total_time_in_the_center = 0, 0
 
+    # LP: This loop could have been easily vectorized! Can you spot how?
     for position in positions:
         x, y = position
         if x + half_box_size < outer_area_size or x - half_box_size > arena_size - outer_area_size or y + half_box_size < outer_area_size or y - half_box_size > arena_size - outer_area_size:
@@ -131,6 +136,8 @@ for _ in range(num_steps): # Loop over the number of steps in the simulation
 
     # Draw the arena border
     cv2.rectangle(frame, (0, 0), (frame_size-1, frame_size-1), (255, 255, 255), 2)
+
+    # LP very small, but to avoid having any kind of hard coding color tuples could have also been variables
 
     # Write the frame to the video
     out.write(frame)

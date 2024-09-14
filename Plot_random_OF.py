@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Simulation parameters
+# LP: if you had defined these parameters and the loop below in a function you could have used it consistently in both scripts!
+
 arena_size = 100  # Arena size in cm
 box_size = 5  # "mouse" size in cm (5x5)
 half_box_size = box_size / 2  # Half of the box size, used for boundary calculations
