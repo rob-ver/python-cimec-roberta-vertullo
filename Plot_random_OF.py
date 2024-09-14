@@ -24,6 +24,7 @@ num_steps = 1000
 x_positions = [position[0]]
 y_positions = [position[1]]
 
+# LP: if you had defined this loop in a function you could have used it consistently in both scripts!
 # Simulation loop of the movement of the box (mouse) within the arena
 for _ in range(num_steps):
     # Sample the step length and speed from normal distributions 
