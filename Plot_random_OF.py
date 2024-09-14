@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Simulation parameters
+# LP: if you had defined these parameters and the loop below in a function you could have used it consistently in both scripts!
+
 arena_size = 100  # Arena size in cm
 box_size = 5  # "mouse" size in cm (5x5)
 half_box_size = box_size / 2  # Half of the box size, used for boundary calculations
@@ -24,7 +26,6 @@ num_steps = 1000
 x_positions = [position[0]]
 y_positions = [position[1]]
 
-# LP: if you had defined this loop in a function you could have used it consistently in both scripts!
 # Simulation loop of the movement of the box (mouse) within the arena
 for _ in range(num_steps):
     # Sample the step length and speed from normal distributions 
